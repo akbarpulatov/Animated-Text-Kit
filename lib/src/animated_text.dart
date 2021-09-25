@@ -111,6 +111,8 @@ class AnimatedTextKit extends StatefulWidget {
   /// By default it is set to 3
   final int totalRepeatCount;
 
+  final AnimationController? animationController;
+
   const AnimatedTextKit({
     Key? key,
     required this.animatedTexts,
@@ -124,6 +126,7 @@ class AnimatedTextKit extends StatefulWidget {
     this.isRepeatingAnimation = true,
     this.totalRepeatCount = 3,
     this.repeatForever = false,
+    this.animationController,
   })  : assert(animatedTexts.length > 0),
         assert(!isRepeatingAnimation || totalRepeatCount > 0 || repeatForever),
         assert(null == onFinished || !repeatForever),
@@ -214,7 +217,8 @@ class _AnimatedTextKitState extends State<AnimatedTextKit>
   void _initAnimation() {
     _currentAnimatedText = widget.animatedTexts[_index];
 
-    _controller = AnimationController(
+    // TODO: add animation controller here
+    _controller = widget.animationController ?? AnimationController(
       duration: _currentAnimatedText.duration,
       vsync: this,
     );
